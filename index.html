@@ -106,6 +106,13 @@
     .badge-green-gradient {
       background: linear-gradient(135deg, #16a34a, #22c55e, #16a34a);
     }
+    /* Enquanto o script da Wistia não define o <wistia-player>, mostra o swatch do vídeo */
+    wistia-player:not(:defined) {
+      display: block;
+      padding-top: 177.78%; /* 9:16 */
+      background: center / cover no-repeat var(--wistia-swatch);
+      filter: blur(5px);
+    }
   </style>
 </head>
 <body class="bg-brandWhite text-brandDark font-sans antialiased overflow-x-hidden">
@@ -908,7 +915,10 @@
       document.head.appendChild(eJS);
       
       const container = document.getElementById("videoContainer");
-      container.innerHTML = '<wistia-player media-id="' + SITE_CONFIG.wistiaMediaId + '" aspect="0.5625"></wistia-player>';
+      const id = SITE_CONFIG.wistiaMediaId;
+      container.innerHTML =
+        '<wistia-player media-id="' + id + '" aspect="0.5625" autoplay' +
+        ' style="--wistia-swatch: url(https://fast.wistia.com/embed/medias/' + id + '/swatch)"></wistia-player>';
     }
 
     // 2. Scarcity Timer
