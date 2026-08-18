@@ -1,0 +1,10 @@
+{
+  "name": "jiu-dina",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page +250 Dinamicas Interativas de Jiu-Jitsu",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}
