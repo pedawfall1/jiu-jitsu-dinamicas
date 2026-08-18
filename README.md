@@ -6,7 +6,7 @@ um `index.html`, o Tailwind via CDN e as imagens locais.
 ## Rodar
 
 ```bash
-npm run dev
+node server.js
 ```
 
 Abre em http://localhost:5173 (servidor estático em `server.js`, sem dependências).
@@ -17,10 +17,20 @@ Também dá para abrir o `index.html` direto no navegador.
 ```
 index.html        página inteira (marcação + estilos + scripts)
 config.js         links de checkout, pixel, WhatsApp, vídeo e contador
-server.js         servidor estático para desenvolvimento
+server.js         servidor estático para desenvolvimento (não vai para o deploy)
+vercel.json       força deploy estático na Vercel
 assets/img/       imagens
 assets/favicon.svg
 ```
+
+## Deploy
+
+É um site estático: a Vercel serve os arquivos da raiz, sem build.
+
+O `vercel.json` existe porque a Vercel detectava o projeto como servidor Node
+(por causa do `server.js` + `package.json`) e tentava executá-lo, devolvendo 404 em vez
+da página. Com `"framework": null` ela usa o preset "Other" e serve os arquivos direto.
+O `package.json` foi removido pelo mesmo motivo — o site não depende de nada.
 
 ## Antes de publicar — preencha `config.js`
 
