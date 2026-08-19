@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiz - Etapa 3</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfcfc;
+            /* Permite rolagem nesta tela, pois o conteúdo é maior */
+        }
+    </style>
+</head>
+<body class="w-full mx-auto bg-[#fcfcfc] text-[#1a1a1a]">
+  
+  <div class="w-full max-w-[440px] mx-auto px-5 pt-8 pb-12 flex flex-col items-center">
+      
+      <!-- Top Card (Black Box) -->
+      <div class="bg-[#151515] rounded-[28px] w-full pt-8 pb-6 px-4 flex flex-col items-center shadow-xl relative overflow-hidden mt-2">
+          <p class="text-[#888888] font-bold text-[10px] tracking-[0.1em] uppercase mb-1">
+              Tempo médio para primeiros resultados
+          </p>
+          
+          <div class="flex items-center justify-center mt-1">
+              <!-- Usando verde vibrante parecido com o da referência -->
+              <span class="text-[#20c95a] font-black text-[46px] tracking-tighter leading-none">
+                  15 Dias
+              </span>
+          </div>
+          
+          <div class="bg-[#203a28] rounded-full px-3 py-1.5 mt-4 flex items-center gap-2 border border-[#2a4d35]">
+              <span class="text-[#4ade80] font-bold text-[11px] tracking-wide">+ FOCO E DISCIPLINA</span>
+              <span class="w-1.5 h-1.5 bg-[#ef4444] rounded-full animate-pulse shadow-[0_0_5px_#ef4444]"></span>
+          </div>
+      </div>
+
+      <!-- 3 Icons Section -->
+      <div class="flex gap-4 mt-8 mb-6">
+          <div class="w-[76px] h-[76px] bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center text-3xl border border-gray-50/50">
+              🏠
+          </div>
+          <div class="w-[76px] h-[76px] bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center text-3xl border border-gray-50/50">
+              🥋
+          </div>
+          <div class="w-[76px] h-[76px] bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center text-3xl border border-gray-50/50">
+              🧠
+          </div>
+      </div>
+
+      <!-- Headlines -->
+      <h2 class="text-center font-extrabold text-[24px] leading-[1.2] tracking-tight text-[#1a1a1a] px-2 mt-2">
+          As dinâmicas aplicadas por <span class="text-[#1a1a1a]">pais comuns</span> geram mais de <span class="text-[#20c95a]">100% de melhora</span> no comportamento.
+      </h2>
+      
+      <p class="text-center text-[#737373] font-medium text-[16px] leading-snug px-3 mt-4">
+          Aplicadas uma vez ao dia através de brincadeiras simples e divertidas.
+      </p>
+
+      <!-- Belief Breakers List -->
+      <div class="w-full flex flex-col gap-3 mt-8">
+          <div class="bg-white border border-gray-100 rounded-[18px] p-4 flex items-center shadow-sm">
+              <span class="text-[#ef4444] font-black text-xl mr-3 leading-none">✕</span>
+              <span class="text-[#404040] font-bold text-[15px]">Sem Precisar Ser Faixa Preta</span>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-[18px] p-4 flex items-center shadow-sm">
+              <span class="text-[#ef4444] font-black text-xl mr-3 leading-none">✕</span>
+              <span class="text-[#404040] font-bold text-[15px]">Sem Precisar de Tatames Caros</span>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-[18px] p-4 flex items-center shadow-sm">
+              <span class="text-[#ef4444] font-black text-xl mr-3 leading-none">✕</span>
+              <span class="text-[#404040] font-bold text-[15px]">Sem Precisar Sair de Casa</span>
+          </div>
+      </div>
+
+      <!-- Botão para Próxima Etapa (que seria o checkout, advertorial ou pergunta 4) -->
+      <div class="w-full mt-10">
+          <button class="bg-[#13b56a] hover:bg-[#10a15d] text-white w-full rounded-full py-4 text-[18px] font-extrabold shadow-xl transition-transform active:scale-95 flex items-center justify-center gap-2" onclick="alert('Ir para o Checkout ou Próxima Página!')">
+              Quero Isso Para o Meu Filho
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+          </button>
+      </div>
+
+  </div>
+</body>
+</html>

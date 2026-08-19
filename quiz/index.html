@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiz - Dinâmicas de Jiu-Jitsu</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfcfc;
+        }
+        /* Garantir que não tenha scroll vertical */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-[100dvh] w-full mx-auto justify-center bg-[#fcfcfc]">
+  <!-- Wrapper com menos margem lateral e elementos maiores -->
+  <div class="flex flex-col items-center w-full max-w-[440px] mx-auto px-5 gap-6">
+    
+      <!-- Badge -->
+      <div class="flex items-center bg-[#ebfcf3] text-[#13b56a] font-bold px-4 py-1.5 rounded-full text-[13px] tracking-wide shadow-sm border border-[#d1fae5]">
+          <span class="w-2.5 h-2.5 bg-[#13b56a] rounded-full mr-2"></span>
+          Pais Aplicando Isso +1.327
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-center font-extrabold text-[32px] leading-[1.05] tracking-tight text-[#1a1a1a]">
+          Eu vou te mostrar o método que está fazendo pais comuns ensinarem Jiu-Jitsu aos filhos através de Dinâmicas Divertidas
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-center text-[#737373] font-medium text-[17px] leading-snug px-1">
+          Pais que não tinham experiência usaram isso para ensinar <strong class="text-[#525252]">disciplina e defesa pessoal</strong> em 15 dias <strong class="text-[#525252]">mesmo sem tempo livre.</strong>
+      </p>
+
+      <!-- Box -->
+      <div class="bg-[#fff9eb] border border-[#fae2b1] text-[#a16726] font-semibold text-center rounded-2xl px-6 py-5 text-[16px] leading-snug w-full shadow-sm">
+          Aqui você não vai ver treinos chatos, posições perigosas ou teorias complicadas.
+      </div>
+
+      <!-- Botão Slider -->
+      <div class="w-full mt-2">
+        <div class="relative bg-[#f6f6f6] w-full rounded-[24px] h-[80px] flex items-center shadow-sm overflow-hidden border border-gray-100" id="slider-container">
+            <div class="absolute w-full text-center font-extrabold text-[#252525] text-[20px] pointer-events-none z-0 pl-6 opacity-90" id="slider-text">
+                Iniciar Agora
+            </div>
+            <!-- Elemento arrastável -->
+            <div id="slider-thumb" class="bg-[#e9e9e9] w-[64px] h-[64px] rounded-[18px] flex items-center justify-center absolute left-2 cursor-grab active:cursor-grabbing z-10 touch-none shadow-sm transition-colors hover:bg-[#e0e0e0]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Footer Arrows -->
+        <div class="text-[#a3a3a3] font-bold text-[12px] tracking-[0.25em] mt-6 flex flex-col items-center uppercase">
+            Deslize para iniciar
+            <div class="flex gap-1.5 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 text-[#d4d4d4] opacity-40 animate-pulse">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 text-[#d4d4d4] opacity-70 animate-pulse" style="animation-delay: 150ms;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 text-[#d4d4d4] animate-pulse" style="animation-delay: 300ms;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <script>
+    const thumb = document.getElementById('slider-thumb');
+    const container = document.getElementById('slider-container');
+    const text = document.getElementById('slider-text');
+    
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let maxTranslate = 0;
+    
+    const startDrag = (e) => {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        thumb.style.transition = 'none';
+        text.style.transition = 'opacity 0.2s';
+        
+        const containerWidth = container.offsetWidth;
+        const thumbWidth = thumb.offsetWidth;
+        const padding = 8; // left-2 (8px)
+        maxTranslate = containerWidth - thumbWidth - (padding * 2);
+    };
+    
+    const onDrag = (e) => {
+        if (!isDragging) return;
+        
+        // Impede rolagem enquanto arrasta no mobile
+        if(e.cancelable) {
+            e.preventDefault();
+        }
+        
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        let delta = currentX - startX;
+        
+        if (delta < 0) delta = 0;
+        if (delta > maxTranslate) delta = maxTranslate;
+        
+        currentTranslate = delta;
+        thumb.style.transform = `translateX(${delta}px)`;
+        
+        // Efeito de fade no texto conforme desliza
+        const opacity = Math.max(0, 1 - (delta / (maxTranslate * 0.7)));
+        text.style.opacity = opacity;
+    };
+    
+    const stopDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        if (currentTranslate >= maxTranslate - 15) { 
+            // Completou o slide
+            thumb.style.transition = 'transform 0.2s ease-out';
+            thumb.style.transform = `translateX(${maxTranslate}px)`;
+            text.style.opacity = '0';
+            
+            // Aqui você redireciona para a próxima página
+            setTimeout(() => {
+                window.location.href = 'vsl.html';
+            }, 300);
+        } else {
+            // Voltar pro início (Snap back)
+            thumb.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            thumb.style.transform = `translateX(0px)`;
+            text.style.opacity = '0.9';
+            currentTranslate = 0;
+        }
+    };
+    
+    thumb.addEventListener('mousedown', startDrag);
+    thumb.addEventListener('touchstart', startDrag, {passive: true});
+    
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('touchmove', onDrag, {passive: false});
+    
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+  </script>
+</body>
+</html>

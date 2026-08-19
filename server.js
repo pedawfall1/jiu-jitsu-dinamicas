@@ -19,10 +19,17 @@ const TYPES = {
 http
   .createServer((req, res) => {
     const urlPath = decodeURIComponent(req.url.split("?")[0]);
-    const file = path.join(ROOT, urlPath === "/" ? "index.html" : urlPath);
+    let file = path.join(ROOT, urlPath === "/" ? "index.html" : urlPath);
     if (!file.startsWith(ROOT)) {
       res.writeHead(403).end("Forbidden");
       return;
+    }
+    try {
+      if (fs.statSync(file).isDirectory()) {
+        file = path.join(file, "index.html");
+      }
+    } catch (e) {
+      // Ignora erro se o arquivo não existir (será pego no readFile)
     }
     fs.readFile(file, (err, data) => {
       if (err) {

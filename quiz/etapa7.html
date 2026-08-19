@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiz - Resgate de Voucher</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brandNeon: '#b4f03d',
+                        brandDarkGreen: '#4d7a12',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #b4f03d;
+            overflow: hidden; /* Evita scroll na animação */
+        }
+
+        /* Animações dos elementos flutuantes no fundo */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(15px) rotate(-10deg); }
+        }
+        .floating-1 { animation: float 6s ease-in-out infinite; }
+        .floating-2 { animation: float-reverse 8s ease-in-out infinite; }
+        .floating-3 { animation: float 7s ease-in-out infinite; }
+
+        /* Estilos do Cartão que Gira (Flip Card) */
+        .flip-card {
+            perspective: 1500px;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        /* Face Base do Cartão */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 5px solid #bef264;
+            /* Sombra dura preta idêntica à referência, aplicada direto na face para não bugar o 3D */
+            box-shadow: 12px 12px 0px 0px #1a1a1a; 
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+            border-color: #facc15;
+        }
+
+        /* Detalhes Pretos nos cantos (idêntico à referência) */
+        .corner-accent-tl, .corner-accent-br {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #1a1a1a;
+            z-index: 0;
+        }
+        .corner-accent-tl {
+            top: -5px;
+            left: -5px;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            border-top-left-radius: 14px;
+        }
+        .corner-accent-br {
+            bottom: -5px;
+            right: -5px;
+            clip-path: polygon(100% 100%, 0 100%, 100% 0);
+            border-bottom-right-radius: 14px;
+        }
+
+        /* Recortes laterais do Voucher */
+        .ticket-cutout::before, .ticket-cutout::after {
+            content: '';
+            position: absolute;
+            top: 70%; /* Mais para baixo, para deixar espaço pro código de barras */
+            width: 32px;
+            height: 32px;
+            background-color: #b4f03d; /* cor do fundo da página */
+            border-radius: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+        .ticket-cutout::before { 
+            left: -20px; 
+            border-right: 5px solid #bef264;
+        }
+        .ticket-cutout::after { 
+            right: -20px; 
+            border-left: 5px solid #bef264;
+        }
+        
+        /* Borda tracejada separando o código de barras */
+        .ticket-dashed-line {
+            position: absolute;
+            top: 70%;
+            left: 15px;
+            right: 15px;
+            border-top: 3px dashed #e5e7eb;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* Recortes do verso (amarelo) */
+        .flip-card-back.ticket-cutout::before { border-right: 5px solid #facc15; }
+        .flip-card-back.ticket-cutout::after { border-left: 5px solid #facc15; }
+        .flip-card-back .ticket-dashed-line { border-top: 3px dashed #fef08a; }
+    </style>
+    <!-- Puxar config local -->
+    <script src="../config.js"></script>
+</head>
+<body class="w-full h-[100dvh] flex flex-col items-center relative text-[#1a1a1a]">
+  
+  <!-- Elementos de fundo flutuantes -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <!-- Icon 1 -->
+      <div class="absolute top-[15%] left-[5%] floating-1 opacity-70">
+          <svg width="48" height="32" viewBox="0 0 48 32" fill="#7ba817">
+              <rect width="48" height="32" rx="6"/>
+              <line x1="8" y1="16" x2="40" y2="16" stroke="#b4f03d" stroke-width="2"/>
+          </svg>
+      </div>
+      <!-- Icon 2 -->
+      <div class="absolute top-[60%] right-[5%] floating-2 opacity-70">
+          <svg width="40" height="28" viewBox="0 0 40 28" fill="#7ba817">
+              <rect width="40" height="28" rx="4"/>
+              <line x1="6" y1="14" x2="34" y2="14" stroke="#b4f03d" stroke-width="2"/>
+          </svg>
+      </div>
+      <!-- Stars -->
+      <div class="absolute top-[35%] right-[15%] floating-3 text-[#7ba817] text-2xl">✦</div>
+      <div class="absolute top-[65%] left-[15%] floating-1 text-[#7ba817] text-xl">✦</div>
+      <div class="absolute top-[10%] right-[30%] floating-2 text-[#7ba817] text-sm">✦</div>
+      <div class="absolute top-[80%] right-[25%] floating-3 text-[#7ba817] text-3xl opacity-60">✦</div>
+      <div class="absolute top-[25%] left-[25%] floating-2 text-[#7ba817] text-lg opacity-80">✦</div>
+      <div class="absolute top-[45%] left-[5%] floating-3 text-[#7ba817] text-sm opacity-90">✦</div>
+      <div class="absolute top-[5%] left-[60%] floating-1 text-[#7ba817] text-xl opacity-70">✦</div>
+  </div>
+
+  <div class="w-full max-w-[400px] h-full flex flex-col justify-around px-6 py-6 relative z-10">
+      
+      <!-- Headers dinâmicos -->
+      <div class="flex flex-col items-center text-center mt-2">
+          <h1 id="main-title" class="font-black text-[34px] leading-tight text-black transition-all duration-500">
+              Resgate<br>Seu Voucher 🎁
+          </h1>
+          <p id="sub-title" class="text-brandDarkGreen font-semibold text-[14px] mt-4 max-w-[280px] leading-snug transition-all duration-500">
+              Restam apenas 12 Vouchers para novos pais. Clique em Resgatar Agora.
+          </p>
+      </div>
+
+      <!-- Área do Cartão / Ticket (Mais alto e vertical) -->
+      <div class="w-full h-[400px] my-4 relative px-2">
+          
+          <div id="voucher-card" class="flip-card">
+              <div class="flip-card-inner">
+                  
+                  <!-- FRENTE DO CARTÃO -->
+                  <div class="flip-card-front ticket-cutout">
+                      <!-- Detalhes pretos nos cantos -->
+                      <div class="corner-accent-tl"></div>
+                      <div class="corner-accent-br"></div>
+                      
+                      <div class="ticket-dashed-line"></div>
+                      
+                      <div class="h-[70%] w-full flex flex-col items-center justify-center relative z-10 pt-4">
+                          <!-- Logo Genérico Jiu-Jitsu -->
+                          <div class="w-[85px] h-[85px] bg-black rounded-full flex items-center justify-center text-[#b4f03d] mb-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                          </div>
+                          <h2 class="font-extrabold text-[26px] leading-[1.1] text-black">Resgate seu<br>voucher</h2>
+                      </div>
+                      
+                      <div class="h-[30%] w-full flex flex-col items-center justify-center relative z-10 px-8">
+                          <!-- Código de Barras Fake (SVG) -->
+                          <svg width="100%" height="55" preserveAspectRatio="none">
+                              <rect x="0" y="0" width="4" height="60" fill="black"/><rect x="8" y="0" width="2" height="60" fill="black"/><rect x="14" y="0" width="8" height="60" fill="black"/><rect x="26" y="0" width="4" height="60" fill="black"/><rect x="34" y="0" width="6" height="60" fill="black"/><rect x="44" y="0" width="2" height="60" fill="black"/><rect x="50" y="0" width="10" height="60" fill="black"/><rect x="64" y="0" width="4" height="60" fill="black"/><rect x="72" y="0" width="2" height="60" fill="black"/><rect x="78" y="0" width="6" height="60" fill="black"/><rect x="88" y="0" width="4" height="60" fill="black"/><rect x="96" y="0" width="2" height="60" fill="black"/><rect x="102" y="0" width="8" height="60" fill="black"/><rect x="114" y="0" width="4" height="60" fill="black"/><rect x="122" y="0" width="6" height="60" fill="black"/><rect x="132" y="0" width="2" height="60" fill="black"/><rect x="138" y="0" width="10" height="60" fill="black"/><rect x="152" y="0" width="4" height="60" fill="black"/><rect x="160" y="0" width="2" height="60" fill="black"/><rect x="166" y="0" width="6" height="60" fill="black"/><rect x="176" y="0" width="4" height="60" fill="black"/><rect x="184" y="0" width="8" height="60" fill="black"/><rect x="196" y="0" width="4" height="60" fill="black"/><rect x="204" y="0" width="6" height="60" fill="black"/><rect x="214" y="0" width="2" height="60" fill="black"/><rect x="220" y="0" width="10" height="60" fill="black"/>
+                          </svg>
+                      </div>
+                  </div>
+                  
+                  <!-- VERSO DO CARTÃO (Pós-Resgate) -->
+                  <div class="flip-card-back ticket-cutout">
+                      <!-- Detalhes no verso -->
+                      <div class="ticket-dashed-line"></div>
+                      
+                      <div class="h-[70%] w-full flex flex-col items-center justify-center relative z-10 pt-4 px-6">
+                          <h2 class="font-black text-[44px] leading-none mb-2 text-black">85% OFF</h2>
+                          <h3 class="font-extrabold text-[24px] leading-tight mb-4 text-black">De Desconto</h3>
+                          <p class="text-[11px] font-bold text-gray-500 leading-tight">
+                              Pelo seu primeiro acesso você ganhou um bônus de 85% OFF válido somente uma vez.
+                          </p>
+                      </div>
+                      
+                      <div class="h-[30%] w-full flex flex-col items-center justify-center relative z-10 px-8">
+                          <!-- Código de Barras Fake (SVG) -->
+                          <svg width="100%" height="40" preserveAspectRatio="none">
+                              <!-- Mesmo código de barras -->
+                              <rect x="0" y="0" width="4" height="50" fill="black"/><rect x="8" y="0" width="2" height="50" fill="black"/><rect x="14" y="0" width="8" height="50" fill="black"/><rect x="26" y="0" width="4" height="50" fill="black"/><rect x="34" y="0" width="6" height="50" fill="black"/><rect x="44" y="0" width="2" height="50" fill="black"/><rect x="50" y="0" width="10" height="50" fill="black"/><rect x="64" y="0" width="4" height="50" fill="black"/><rect x="72" y="0" width="2" height="50" fill="black"/><rect x="78" y="0" width="6" height="50" fill="black"/><rect x="88" y="0" width="4" height="50" fill="black"/><rect x="96" y="0" width="2" height="50" fill="black"/><rect x="102" y="0" width="8" height="50" fill="black"/><rect x="114" y="0" width="4" height="50" fill="black"/><rect x="122" y="0" width="6" height="50" fill="black"/><rect x="132" y="0" width="2" height="50" fill="black"/><rect x="138" y="0" width="10" height="50" fill="black"/><rect x="152" y="0" width="4" height="50" fill="black"/><rect x="160" y="0" width="2" height="50" fill="black"/><rect x="166" y="0" width="6" height="50" fill="black"/><rect x="176" y="0" width="4" height="50" fill="black"/><rect x="184" y="0" width="8" height="50" fill="black"/><rect x="196" y="0" width="4" height="50" fill="black"/><rect x="204" y="0" width="6" height="50" fill="black"/><rect x="214" y="0" width="2" height="50" fill="black"/><rect x="220" y="0" width="10" height="50" fill="black"/>
+                          </svg>
+                          <span class="font-bold text-[12px] tracking-[0.2em] mt-1 text-gray-800">237849560123</span>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+      <!-- Botões Action -->
+      <div class="w-full mb-4 relative z-10">
+          <button id="action-btn" class="bg-black hover:bg-gray-900 text-white w-full rounded-2xl py-5 text-[18px] font-extrabold shadow-2xl transition-transform active:scale-95 flex items-center justify-center">
+              Resgatar Agora
+          </button>
+      </div>
+
+  </div>
+
+  <script>
+      const btn = document.getElementById('action-btn');
+      const card = document.getElementById('voucher-card');
+      const mainTitle = document.getElementById('main-title');
+      const subTitle = document.getElementById('sub-title');
+      
+      let resgatado = false;
+
+      function dispararConfetes() {
+          var duration = 3 * 1000;
+          var animationEnd = Date.now() + duration;
+          var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+          function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+          }
+
+          var interval = setInterval(function() {
+              var timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                  return clearInterval(interval);
+              }
+
+              var particleCount = 50 * (timeLeft / duration);
+              
+              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+          }, 250);
+      }
+
+      btn.addEventListener('click', function() {
+          if (!resgatado) {
+              // Gira o cartão
+              card.classList.add('flipped');
+              
+              // Toca confetes
+              dispararConfetes();
+
+              // Atualiza Textos
+              mainTitle.style.opacity = 0;
+              subTitle.style.opacity = 0;
+              
+              setTimeout(() => {
+                  mainTitle.innerHTML = 'Voucher<br>Resgatado! 🎉';
+                  subTitle.innerHTML = 'Clique abaixo para finalizar seu acesso e garantir o desconto até hoje 23:59.';
+                  mainTitle.style.opacity = 1;
+                  subTitle.style.opacity = 1;
+                  
+                  // Atualiza botão
+                  btn.innerHTML = 'Finalizar Acesso';
+                  btn.classList.add('bg-black');
+              }, 400);
+
+              resgatado = true;
+          } else {
+              // Segunda vez que clica (Finalizar Acesso) -> Redireciona para a Página de Resumo
+              window.location.href = 'resumo.html';
+          }
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiz - Oferta Especial</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+        }
+        .feature-card {
+            border-left: 6px solid #a3e635; /* border-lime-400 */
+        }
+        /* Efeito de listras para o card de preço original */
+        .crossed-price {
+            position: relative;
+            display: inline-block;
+        }
+        .crossed-price::after {
+            content: '';
+            position: absolute;
+            left: -5%;
+            top: 50%;
+            width: 110%;
+            height: 3px;
+            background-color: #ef4444; /* red-500 */
+            transform: translateY(-50%) rotate(-5deg);
+        }
+        html { scroll-behavior: smooth; }
+    </style>
+    <!-- Config Local -->
+    <script src="../config.js"></script>
+</head>
+<body class="w-full bg-[#111111] text-[#1a1a1a] min-h-[100dvh]">
+  
+  <!-- SESSÃO ÚNICA: OFERTA E PLANOS (Fundo Escuro) -->
+  <div class="w-full pt-12 pb-16 flex flex-col items-center px-5">
+      <div class="w-full max-w-[440px] flex flex-col items-center">
+          
+          <!-- Dynamic Date Badge -->
+          <div class="bg-[#fef3c7] border border-[#fde047] text-[#92400e] rounded-xl py-3 px-4 text-center font-bold text-[13px] leading-snug w-full mb-8 shadow-md">
+              ⏱️ Este desconto é aplicável somente no dia que foi resgatado o voucher: <span id="data-hoje">HOJE</span>
+          </div>
+
+          <h2 class="text-center font-black text-[28px] leading-[1.1] text-white mb-3">
+              Seu acesso está quase liberado para uso!
+          </h2>
+          <p class="text-center text-[#9ca3af] font-medium text-[15px] leading-relaxed px-4 mb-10">
+              Escolha o melhor plano e garanta seu acesso ao Método Jiu-Jitsu em Casa agora mesmo.
+          </p>
+
+          <!-- Card 1: Preço Original (Opaco/Cinza) -->
+          <div class="w-full bg-white rounded-t-[30px] rounded-b-xl p-6 shadow-lg mb-6 opacity-80">
+              <h3 class="font-extrabold text-[22px] text-gray-900 leading-tight mb-4">
+                  Plano Completo<br>Jiu-Jitsu em Casa
+              </h3>
+              
+              <div class="crossed-price font-black text-[42px] text-gray-400 tracking-tighter mb-1">
+                  R$ 147,00
+              </div>
+              
+              <p class="text-[#e11d48] font-bold text-[12px] mb-4">
+                  ⚠️ Você pagaria isso por 12 meses de acesso
+              </p>
+              
+              <p class="text-gray-500 font-medium text-[13px] mb-6">
+                  Criado para aqueles que perdem oportunidades e compram sem descontos promocionais.
+              </p>
+
+              <h4 class="font-extrabold text-[15px] text-gray-900 mb-3">O que está incluso</h4>
+              
+              <ul class="flex flex-col gap-3">
+                  <li class="flex items-center gap-3">
+                      <div class="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-[10px]">✓</div>
+                      <span class="text-gray-400 font-semibold text-[14px]">Plataforma Completa Jiu-Jitsu em Casa</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                      <div class="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-[10px]">✓</div>
+                      <span class="text-gray-400 font-semibold text-[14px]">Módulo de Dinâmicas Inteligentes</span>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Card 2: Oferta com Desconto (Destaque) -->
+          <div class="w-full bg-white rounded-[30px] p-1 shadow-[0_0_40px_rgba(190,242,100,0.15)] relative mb-12 border border-[#bef264]">
+              <!-- Green Header -->
+              <div class="bg-[#bef264] rounded-t-[28px] py-2 text-center font-black text-[13px] uppercase tracking-widest text-[#166534]">
+                  🔥 85% De Desconto 🔥
+              </div>
+              
+              <div class="p-6">
+                  <h3 class="font-extrabold text-[22px] text-gray-900 leading-tight mb-4">
+                      Plano Completo<br>Jiu-Jitsu em Casa
+                  </h3>
+                  
+                  <div class="flex items-baseline gap-1">
+                      <span class="font-bold text-[18px] text-gray-900">R$</span>
+                      <span class="font-black text-[54px] text-gray-900 tracking-tighter leading-none">19,90</span>
+                      <span class="font-semibold text-[14px] text-gray-500 ml-1">à vista</span>
+                  </div>
+                  <p class="font-bold text-[16px] text-[#16a34a] mb-4 mt-1">
+                      Economia de R$ 127,10!
+                  </p>
+                  
+                  <p class="text-gray-500 font-medium text-[13px] leading-snug mb-6 border-b border-gray-100 pb-6">
+                      Oferta Exclusiva de Acesso Válida somente no dia <span id="data-extensa" class="font-bold">hoje</span>.
+                  </p>
+
+                  <h4 class="font-extrabold text-[15px] text-gray-900 mb-4">O que está incluso</h4>
+                  
+                  <ul class="flex flex-col gap-3 mb-8">
+                      <li class="flex items-center gap-3">
+                          <div class="w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center text-white font-bold text-[12px]">✓</div>
+                          <span class="text-gray-700 font-bold text-[14px]">Plataforma Completa Jiu-Jitsu em Casa</span>
+                      </li>
+                      <li class="flex items-center gap-3">
+                          <div class="w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center text-white font-bold text-[12px]">✓</div>
+                          <span class="text-gray-700 font-bold text-[14px]">Módulo de Dinâmicas Inteligentes</span>
+                      </li>
+                      <li class="flex items-center gap-3">
+                          <div class="w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center text-white font-bold text-[12px]">✓</div>
+                          <span class="text-gray-700 font-bold text-[14px]">+ De 250 Exemplos de Brincadeiras</span>
+                      </li>
+                      <li class="flex items-center gap-3">
+                          <div class="w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center text-white font-bold text-[12px]">✓</div>
+                          <span class="text-gray-700 font-bold text-[14px]">Acesso Durante 12 Meses</span>
+                      </li>
+                      <li class="flex items-center gap-3">
+                          <div class="w-5 h-5 bg-[#22c55e] rounded-full flex items-center justify-center text-white font-bold text-[12px]">✓</div>
+                          <span class="text-gray-700 font-bold text-[14px]">Suporte Individual & Garantia</span>
+                      </li>
+                  </ul>
+
+                  <!-- Checkout Button -->
+                  <button id="checkout-btn" class="bg-[#22c55e] hover:bg-[#16a34a] text-white w-full rounded-2xl py-5 text-[18px] font-extrabold shadow-[0_8px_20px_rgba(34,197,94,0.4)] transition-transform active:scale-95 text-center">
+                      Quero o Plano Completo
+                  </button>
+              </div>
+          </div>
+
+          <!-- Confiança Cards -->
+          <div class="w-full grid grid-cols-3 gap-3 mb-6">
+              <div class="bg-white rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                  <div class="w-10 h-10 bg-[#f0fdf4] text-[#16a34a] rounded-full flex items-center justify-center mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                  </div>
+                  <span class="font-bold text-[#1f2937] text-[10px] uppercase tracking-wider">Acesso<br>Imediato</span>
+              </div>
+              <div class="bg-white rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                  <div class="w-10 h-10 bg-[#f0fdf4] text-[#16a34a] rounded-full flex items-center justify-center mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                  </div>
+                  <span class="font-bold text-[#1f2937] text-[10px] uppercase tracking-wider">Compra<br>Segura</span>
+              </div>
+              <div class="bg-white rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                  <div class="w-10 h-10 bg-[#f0fdf4] text-[#16a34a] rounded-full flex items-center justify-center mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <span class="font-bold text-[#1f2937] text-[10px] uppercase tracking-wider">Suporte<br>Prioritário</span>
+              </div>
+          </div>
+
+          <!-- Garantia Incondicional -->
+          <div class="bg-white rounded-[24px] p-6 w-full shadow-lg flex gap-4 mb-10">
+              <div class="text-gray-300 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+              </div>
+              <div>
+                  <h4 class="font-extrabold text-[16px] text-gray-900 mb-2">Garantia Incondicional de 7 dias</h4>
+                  <p class="text-gray-500 text-[13px] font-medium leading-relaxed">
+                      Se por qualquer motivo você não ficar satisfeito nos primeiros 7 dias, devolvemos 100% do seu investimento. Sem burocracia, sem perguntas.
+                  </p>
+              </div>
+          </div>
+
+          <!-- FAQ -->
+          <div class="w-full">
+              <h3 class="text-white font-extrabold text-[20px] mb-4 ml-2">Perguntas Frequentes</h3>
+              
+              <div class="flex flex-col gap-3">
+                  <!-- Pergunta 1 -->
+                  <details class="bg-[#1f1f1f] rounded-xl overflow-hidden group cursor-pointer">
+                      <summary class="font-bold text-white p-4 flex justify-between items-center outline-none select-none">
+                          Meu filho nunca fez artes marciais, serve pra ele?
+                          <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                      </summary>
+                      <div class="px-4 pb-4 text-gray-400 text-[14px] leading-relaxed">
+                          Sim! O método foi criado exatamente para crianças que estão começando do zero. As dinâmicas são em formato de brincadeira, então eles aprendem os movimentos básicos e a disciplina sem perceber que estão treinando duro.
+                      </div>
+                  </details>
+                  <!-- Pergunta 2 -->
+                  <details class="bg-[#1f1f1f] rounded-xl overflow-hidden group cursor-pointer">
+                      <summary class="font-bold text-white p-4 flex justify-between items-center outline-none select-none">
+                          Preciso comprar tatame ou quimono agora?
+                          <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                      </summary>
+                      <div class="px-4 pb-4 text-gray-400 text-[14px] leading-relaxed">
+                          Não! Essa é a maior vantagem do Método. Você pode aplicar tudo usando um tapete comum ou no chão da sala de casa, usando roupas confortáveis do dia a dia.
+                      </div>
+                  </details>
+                  <!-- Pergunta 3 -->
+                  <details class="bg-[#1f1f1f] rounded-xl overflow-hidden group cursor-pointer">
+                      <summary class="font-bold text-white p-4 flex justify-between items-center outline-none select-none">
+                          E se eu não gostar do conteúdo?
+                          <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                      </summary>
+                      <div class="px-4 pb-4 text-gray-400 text-[14px] leading-relaxed">
+                          Você tem acesso total à nossa garantia incondicional de 7 dias. Se aplicar as dinâmicas e não ver nenhuma melhora no comportamento da criança, devolvemos cada centavo do seu dinheiro.
+                      </div>
+                  </details>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+  <script>
+      // Redirecionamento do Checkout
+      document.getElementById('checkout-btn').addEventListener('click', function() {
+          if (window.SITE_CONFIG && window.SITE_CONFIG.links && window.SITE_CONFIG.links.checkoutPremium) {
+              window.location.href = window.SITE_CONFIG.links.checkoutPremium;
+          } else {
+              alert('O link de checkout não foi configurado no config.js!');
+          }
+      });
+
+      // Data Dinâmica nos Badges
+      const hoje = new Date();
+      const formatadoCurto = hoje.toLocaleDateString('pt-BR');
+      const opcoes = { day: 'numeric', month: 'long' };
+      const formatadoExtenso = hoje.toLocaleDateString('pt-BR', opcoes);
+      
+      document.getElementById('data-hoje').innerText = formatadoCurto;
+      document.getElementById('data-extensa').innerText = formatadoExtenso;
+  </script>
+</body>
+</html>
