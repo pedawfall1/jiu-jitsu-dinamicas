@@ -26,3 +26,17 @@ window.SITE_CONFIG = {
   timerStartSeconds: 7 * 60 + 41,
   timerResetSeconds: 57 * 60 + 41,
 };
+
+/**
+ * Função utilitária para navegar entre as páginas do quiz.
+ * Resolve problemas de caminhos relativos quando hospedado no Vercel (cleanUrls)
+ * e também mantém o funcionamento local (file://).
+ */
+window.navigateQuiz = function(pageName) {
+  if (window.location.protocol === 'file:') {
+    window.location.href = pageName + '.html';
+  } else {
+    // Força o caminho absoluto da pasta quiz no Vercel
+    window.location.href = '/quiz/' + pageName;
+  }
+};
