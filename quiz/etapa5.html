@@ -58,7 +58,7 @@
     </style>
     <script src='../config.js'></script>
 </head>
-<body class="w-full h-[100dvh] overflow-hidden mx-auto bg-black text-white flex flex-col">
+<body class="w-full h-[100dvh] overflow-hidden mx-auto bg-[#09090b] text-white flex flex-col">
   
   <div class="w-full max-w-[440px] h-full mx-auto px-5 py-6 flex flex-col justify-between">
       
@@ -67,86 +67,64 @@
           <!-- Top Tag -->
           <div class="w-full text-left mb-2">
               <span class="text-brandNeon font-bold text-[10px] tracking-[0.15em] uppercase">
-                  Informativo
+                  Transformação Real
               </span>
           </div>
 
           <!-- Headline -->
           <h1 class="w-full text-left font-extrabold text-[26px] leading-[1.1] tracking-tight text-white mb-2">
-              Veja o impacto deste <span class="text-brandNeon">método na educação</span> em 2026 🔥
+              Veja a mudança de postura que acontece em apenas <span class="text-brandNeon">2 semanas</span> 🔥
           </h1>
 
-          <p class="w-full text-left text-[#888888] font-medium text-[13px] leading-snug mb-4">
-              Este é o gráfico de evolução de disciplina e foco nas crianças após a aplicação das dinâmicas.
+          <p class="w-full text-left text-[#888888] font-medium text-[14px] leading-relaxed mb-6">
+              Esta é a diferença exata no comportamento relatada pela maioria dos pais após aplicarem as dinâmicas:
           </p>
       </div>
 
-      <!-- Center KPI + Chart -->
-      <div class="flex flex-col flex-1 min-h-0 w-full gap-4">
-          <!-- KPI Grid -->
-          <div class="w-full grid grid-cols-2 gap-3 shrink-0">
-              <!-- Box 1 -->
-              <div class="bg-brandCard rounded-[18px] p-4 flex flex-col shadow-lg border border-[#2a2a2c]">
-                  <span class="text-[#666666] font-bold text-[9px] tracking-widest uppercase mb-1">Famílias Usando</span>
-                  <span class="text-white font-extrabold text-[22px]">1.327</span>
-                  <div class="flex items-center gap-1 mt-1 text-brandNeon text-[11px] font-bold">
-                      <span>▲</span>
-                      <span>+85%</span>
-                  </div>
+      <!-- Center Before/After -->
+      <div class="flex flex-col flex-1 min-h-0 w-full gap-4 justify-center">
+          
+          <!-- ANTES -->
+          <div class="bg-[#18181b] border border-[#27272a] rounded-[24px] p-5 shadow-lg relative">
+              <div class="absolute -top-3 left-5 bg-[#ef4444] text-white font-black text-[11px] tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
+                  ANTES
               </div>
-              <!-- Box 2 -->
-              <div class="bg-brandCard rounded-[18px] p-4 flex flex-col shadow-lg border border-[#2a2a2c]">
-                  <span class="text-[#666666] font-bold text-[9px] tracking-widest uppercase mb-1">Tempo de Resposta</span>
-                  <span class="text-white font-extrabold text-[22px]">15 Dias</span>
-                  <div class="flex items-center gap-1 mt-1 text-brandNeon text-[11px] font-bold">
-                      <span>▲</span>
-                      <span>Rápido</span>
+              <div class="flex gap-4 items-start mt-3">
+                  <div class="bg-[#ef4444]/10 rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                      <span class="text-[#ef4444] text-xl">😔</span>
                   </div>
+                  <p class="text-[#a1a1aa] font-medium text-[15px] leading-relaxed">
+                      Filho quieto, <strong class="text-[#d4d4d8]">evitava contato visual</strong> e baixava a cabeça ao ser provocado na escola.
+                  </p>
               </div>
           </div>
 
-          <!-- Chart Card -->
-          <div class="w-full bg-brandCard rounded-[24px] p-4 shadow-lg border border-[#2a2a2c] relative overflow-hidden flex flex-col flex-1 min-h-0">
-              <span class="text-[#888888] font-bold text-[10px] tracking-widest uppercase mb-1 shrink-0">Aumento de Foco e Disciplina</span>
-              <span class="text-[#555555] font-medium text-[11px] mb-2 shrink-0">Média de evolução nas 4 semanas</span>
-              
-              <span class="text-white font-black text-[28px] tracking-tighter mb-2 shrink-0">139% de Melhora</span>
+          <!-- SETA DIVISÓRIA -->
+          <div class="w-full flex justify-center py-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#52525b] animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+          </div>
 
-              <!-- SVG Chart and Floating Badge Wrapper -->
-              <div class="w-full flex-1 min-h-0 relative -mx-2 mt-2">
-                  
-                  <!-- Floating Badge on Graph -->
-                  <div class="absolute top-[10%] left-[75%] bg-white rounded-full px-2 py-0.5 flex items-center justify-center shadow-lg z-10 -translate-x-1/2">
-                      <span class="text-black font-extrabold text-[11px]">+139%</span>
+          <!-- DEPOIS -->
+          <div class="bg-[#18181b] border border-[#c9ff26]/30 rounded-[24px] p-5 shadow-[0_0_20px_rgba(201,255,38,0.05)] relative">
+              <div class="absolute -top-3 left-5 bg-brandNeon text-[#09090b] font-black text-[11px] tracking-widest uppercase px-3 py-1 rounded-full shadow-[0_0_15px_rgba(201,255,38,0.3)]">
+                  DEPOIS DE 15 DIAS
+              </div>
+              <div class="flex gap-4 items-start mt-3">
+                  <div class="bg-brandNeon/10 rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                      <span class="text-brandNeon text-xl">🛡️</span>
                   </div>
-
-                  <svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none" class="absolute inset-0">
-                      <defs>
-                          <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stop-color="#c9ff26" stop-opacity="0.3" />
-                              <stop offset="100%" stop-color="#c9ff26" stop-opacity="0" />
-                          </linearGradient>
-                          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                              <feGaussianBlur stdDeviation="3" result="blur" />
-                              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                          </filter>
-                      </defs>
-                      
-                      <!-- Area Fill -->
-                      <path d="M0,140 C30,130 50,135 80,100 C110,65 120,85 160,70 C200,55 220,10 250,20 C280,30 290,10 300,5 L300,150 L0,150 Z" fill="url(#chart-gradient)" />
-                      
-                      <!-- Line -->
-                      <path d="M0,140 C30,130 50,135 80,100 C110,65 120,85 160,70 C200,55 220,10 250,20 C280,30 290,10 300,5" fill="none" stroke="#c9ff26" stroke-width="3" />
-                      
-                      <!-- Point Dot -->
-                      <circle cx="250" cy="20" r="5" fill="#c9ff26" filter="url(#glow)" />
-                  </svg>
+                  <p class="text-white font-medium text-[15px] leading-relaxed">
+                      Já se <strong class="text-brandNeon">posiciona</strong>, brinca de igual pra igual com os outros e <strong class="text-brandNeon">chega em casa mais solto e confiante</strong>.
+                  </p>
               </div>
           </div>
+
       </div>
 
       <!-- Button -->
-      <div class="w-full shrink-0 mt-4 mb-2">
+      <div class="w-full shrink-0 mt-6 mb-2">
           <button class="bg-[#c9ff26] hover:bg-[#b0df21] text-black w-full rounded-full py-4 text-[18px] font-extrabold shadow-[0_0_20px_rgba(201,255,38,0.3)] transition-transform active:scale-95 flex items-center justify-center gap-2" onclick="window.navigateQuiz('etapa6')">
               Continuar
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
