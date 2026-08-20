@@ -275,6 +275,7 @@
       // Redirecionamento do Checkout Premium
       document.getElementById('checkout-btn').addEventListener('click', function() {
           if (window.SITE_CONFIG && window.SITE_CONFIG.links && window.SITE_CONFIG.links.checkoutPremium) {
+              if (window.trackInitiateCheckout) window.trackInitiateCheckout(19.90, 'Plano Completo');
               window.location.href = window.SITE_CONFIG.links.checkoutPremium;
           } else {
               alert('O link de checkout PREMIUM não foi configurado no config.js!');
@@ -284,6 +285,7 @@
       // Redirecionamento do Checkout Básico
       document.getElementById('checkout-basico-btn').addEventListener('click', function() {
           if (window.SITE_CONFIG && window.SITE_CONFIG.links && window.SITE_CONFIG.links.checkoutBasico) {
+              if (window.trackInitiateCheckout) window.trackInitiateCheckout(10.00, 'Plano Básico');
               window.location.href = window.SITE_CONFIG.links.checkoutBasico;
           } else {
               alert('O link de checkout BÁSICO não foi configurado no config.js!');

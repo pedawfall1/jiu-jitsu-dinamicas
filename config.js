@@ -21,9 +21,9 @@ window.SITE_CONFIG = {
   vslMediaId: "1f7llb243d",
 
   links: {
-    checkoutPremium: "", // botão "QUERO O PREMIUM" — R$ 19,90
-    checkoutUpsell:  "", // botão do modal — R$ 14,90
-    checkoutBasico:  "", // link "Continuar com o básico" — R$ 10,00
+    checkoutPremium: "https://pay.cakto.com.br/62zotyu_1053667", // R$ 19,90
+    checkoutUpsell:  "", // modal da página de vendas — R$ 14,90 (ainda sem link)
+    checkoutBasico:  "https://pay.cakto.com.br/if4sza6_1053687", // R$ 10,00
     whatsapp:        "", // ex.: "https://wa.me/5511999999999"
   },
 
@@ -64,6 +64,19 @@ window.SITE_CONFIG = {
     (document.head || document.documentElement).appendChild(u);
   }
 })();
+
+/**
+ * Dispara o evento InitiateCheckout do Meta ao clicar num botão de checkout.
+ * As páginas chamam esta função logo antes de redirecionar para o Cakto.
+ */
+window.trackInitiateCheckout = function(value, contentName) {
+  if (window.fbq) {
+    var params = { currency: "BRL" };
+    if (typeof value === "number") params.value = value;
+    if (contentName) params.content_name = contentName;
+    fbq("track", "InitiateCheckout", params);
+  }
+};
 
 /**
  * Função utilitária para navegar entre as páginas do quiz.

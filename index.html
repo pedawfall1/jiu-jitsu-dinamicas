@@ -1018,11 +1018,19 @@
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 
     // 7. Aplica os links do config.js
+    const checkoutValues = { checkoutPremium: 19.90, checkoutUpsell: 14.90, checkoutBasico: 10.00 };
     document.querySelectorAll("[data-link]").forEach((el) => {
-      const url = SITE_CONFIG.links[el.dataset.link];
+      const key = el.dataset.link;
+      const url = SITE_CONFIG.links[key];
       if (url) {
         el.href = url;
-      } else if (el.dataset.link === "whatsapp") {
+        // Dispara InitiateCheckout (Meta) ao clicar num botão de checkout
+        if (key in checkoutValues) {
+          el.addEventListener("click", () => {
+            if (window.trackInitiateCheckout) window.trackInitiateCheckout(checkoutValues[key]);
+          });
+        }
+      } else if (key === "whatsapp") {
         el.remove(); // sem número configurado, o botão flutuante não aparece
       } else {
         el.removeAttribute("href");

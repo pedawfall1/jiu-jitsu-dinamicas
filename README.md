@@ -42,9 +42,13 @@ Os valores do site original foram removidos; os campos estão vazios esperando o
 | `utmifyPixelId` | Pixel da UTMify — **preenchido** (`6a8750047b15a79c1cf556ad`); `""` desliga |
 | `wistiaMediaId` | vídeo do topo da página de vendas, na Wistia — **já preenchido** (`i4q5pjvdok`) |
 | `vslMediaId` | vídeo da VSL do quiz (`quiz/vsl.html`), na Wistia — **já preenchido** (`1f7llb243d`) |
-| `links.checkoutPremium` | botão "Quero o Premium" — R$ 19,90 |
-| `links.checkoutUpsell` | botão do modal — R$ 14,90 |
-| `links.checkoutBasico` | link "Continuar com o básico" — R$ 10,00 |
+| `links.checkoutPremium` | checkout Premium (R$ 19,90) — **preenchido** (Cakto) |
+| `links.checkoutUpsell` | modal da página de vendas (R$ 14,90) — ainda **sem link** |
+| `links.checkoutBasico` | checkout Básico (R$ 10,00) — **preenchido** (Cakto) |
+
+Ao clicar num botão de checkout a página dispara o evento **InitiateCheckout** do Meta
+(com `value` e `currency: BRL`) antes de redirecionar para o Cakto. O **PageView** é
+disparado em toda página pelo `config.js`.
 | `links.whatsapp` | botão flutuante de WhatsApp |
 | `timerStartSeconds` / `timerResetSeconds` | contador de escassez da seção de planos |
 
