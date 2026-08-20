@@ -39,7 +39,8 @@ Os valores do site original foram removidos; os campos estão vazios esperando o
 | Campo | O que é |
 | --- | --- |
 | `metaPixelId` | Pixel da Meta (deixe `""` para desligar o rastreamento) |
-| `wistiaMediaId` | vídeo do topo, hospedado na Wistia — **já preenchido** (`i4q5pjvdok`) |
+| `wistiaMediaId` | vídeo do topo da página de vendas, na Wistia — **já preenchido** (`i4q5pjvdok`) |
+| `vslMediaId` | vídeo da VSL do quiz (`quiz/vsl.html`), na Wistia — **já preenchido** (`1f7llb243d`) |
 | `links.checkoutPremium` | botão "Quero o Premium" — R$ 19,90 |
 | `links.checkoutUpsell` | botão do modal — R$ 14,90 |
 | `links.checkoutBasico` | link "Continuar com o básico" — R$ 10,00 |

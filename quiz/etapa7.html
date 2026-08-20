@@ -49,7 +49,10 @@
         .floating-2 { animation: float-reverse 8s ease-in-out infinite; }
         .floating-3 { animation: float 7s ease-in-out infinite; }
 
-        /* Estilos do Cartão que Gira (Flip Card) */
+        /* Estilos do Cartão que Gira (Flip Card)
+           Giro em duas fases trocando a face no meio, em vez de depender de
+           backface-visibility — que quebra nos navegadores internos do
+           WhatsApp/Instagram e fazia o verso aparecer espelhado. */
         .flip-card {
             perspective: 1500px;
             width: 100%;
@@ -61,20 +64,17 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transform-style: preserve-3d;
+            transition: transform 0.28s ease-in;
         }
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
+        /* Meio do giro: cartão de perfil (invisível) — momento em que trocamos a face */
+        .flip-card.mid .flip-card-inner {
+            transform: rotateY(90deg);
         }
-        
-        /* Face Base do Cartão */
+
+        /* Faces empilhadas; só uma fica visível por vez */
         .flip-card-front, .flip-card-back {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            inset: 0;
             border-radius: 20px;
             background: #ffffff;
             display: flex;
@@ -82,14 +82,15 @@
             align-items: center;
             justify-content: space-between;
             border: 5px solid #bef264;
-            /* Sombra dura preta idêntica à referência, aplicada direto na face para não bugar o 3D */
-            box-shadow: 12px 12px 0px 0px #1a1a1a; 
+            /* Sombra dura preta idêntica à referência */
+            box-shadow: 12px 12px 0px 0px #1a1a1a;
         }
-        
         .flip-card-back {
-            transform: rotateY(180deg);
+            display: none;
             border-color: #facc15;
         }
+        .flip-card.show-back .flip-card-front { display: none; }
+        .flip-card.show-back .flip-card-back { display: flex; }
 
         /* Detalhes Pretos nos cantos (idêntico à referência) */
         .corner-accent-tl, .corner-accent-br {
@@ -269,9 +270,12 @@
       let resgatado = false;
 
       function dispararConfetes() {
-          var duration = 3 * 1000;
+          // Estouro inicial forte, por cima de tudo (zIndex alto — antes era 0 e ficava atrás do cartão)
+          confetti({ particleCount: 160, spread: 100, startVelocity: 45, origin: { y: 0.55 }, zIndex: 9999 });
+
+          var duration = 2500;
           var animationEnd = Date.now() + duration;
-          var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+          var defaults = { startVelocity: 35, spread: 360, ticks: 70, zIndex: 9999 };
 
           function randomInRange(min, max) {
               return Math.random() * (max - min) + min;
@@ -284,37 +288,40 @@
                   return clearInterval(interval);
               }
 
-              var particleCount = 50 * (timeLeft / duration);
-              
+              var particleCount = 60 * (timeLeft / duration);
+
               confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
               confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-          }, 250);
+          }, 200);
       }
 
       btn.addEventListener('click', function() {
           if (!resgatado) {
-              // Gira o cartão
-              card.classList.add('flipped');
-              
+              resgatado = true;
+
+              // Gira o cartão: vira até o perfil, troca a face no meio e volta
+              card.classList.add('mid');
+              setTimeout(() => {
+                  card.classList.add('show-back');
+                  card.classList.remove('mid');
+              }, 280);
+
               // Toca confetes
               dispararConfetes();
 
               // Atualiza Textos
               mainTitle.style.opacity = 0;
               subTitle.style.opacity = 0;
-              
+
               setTimeout(() => {
                   mainTitle.innerHTML = 'Voucher<br>Resgatado! 🎉';
                   subTitle.innerHTML = 'Clique abaixo para finalizar seu acesso e garantir o desconto até hoje 23:59.';
                   mainTitle.style.opacity = 1;
                   subTitle.style.opacity = 1;
-                  
+
                   // Atualiza botão
                   btn.innerHTML = 'Finalizar Acesso';
-                  btn.classList.add('bg-black');
               }, 400);
-
-              resgatado = true;
           } else {
               // Segunda vez que clica (Finalizar Acesso) -> Redireciona para a Página de Resumo
               window.navigateQuiz('resumo');

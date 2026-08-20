@@ -29,7 +29,10 @@ http
         file = path.join(file, "index.html");
       }
     } catch (e) {
-      // Ignora erro se o arquivo não existir (será pego no readFile)
+      // Reproduz o cleanUrls da Vercel: /quiz/vsl -> /quiz/vsl.html
+      if (!path.extname(file) && fs.existsSync(file + ".html")) {
+        file = file + ".html";
+      }
     }
     fs.readFile(file, (err, data) => {
       if (err) {

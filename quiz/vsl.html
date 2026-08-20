@@ -64,8 +64,10 @@
   <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-        if (window.SITE_CONFIG && window.SITE_CONFIG.wistiaMediaId) {
-            const mediaId = window.SITE_CONFIG.wistiaMediaId;
+        // Usa o vídeo específico da VSL; cai no vídeo geral se não houver.
+        const vslId = window.SITE_CONFIG && (window.SITE_CONFIG.vslMediaId || window.SITE_CONFIG.wistiaMediaId);
+        if (vslId) {
+            const mediaId = vslId;
             
             // Cria o elemento player do Wistia (sem padding responsivo que quebra a altura)
             const container = document.getElementById("video-container");

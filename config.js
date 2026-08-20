@@ -12,8 +12,11 @@ window.SITE_CONFIG = {
   // ID do Pixel da Meta, ex.: "1234567890123456".
   metaPixelId: "",
 
-  // ID do vídeo hospedado na Wistia.
+  // ID do vídeo da Wistia no topo da página de vendas (index.html).
   wistiaMediaId: "i4q5pjvdok",
+
+  // ID do vídeo da Wistia usado na VSL do quiz (quiz/vsl.html).
+  vslMediaId: "1f7llb243d",
 
   links: {
     checkoutPremium: "", // botão "QUERO O PREMIUM" — R$ 19,90
