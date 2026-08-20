@@ -154,6 +154,10 @@
                   <button id="checkout-btn" class="bg-[#22c55e] hover:bg-[#16a34a] text-white w-full rounded-2xl py-5 text-[18px] font-extrabold shadow-[0_8px_20px_rgba(34,197,94,0.4)] transition-transform active:scale-95 text-center">
                       Quero o Plano Completo
                   </button>
+                  
+                  <button id="checkout-basico-btn" class="text-gray-400 font-semibold text-[13px] underline w-full text-center mt-5 hover:text-gray-600 transition-colors">
+                      Continuar com o Plano Básico (R$ 10,00)
+                  </button>
               </div>
           </div>
 
@@ -236,12 +240,21 @@
   </div>
 
   <script>
-      // Redirecionamento do Checkout
+      // Redirecionamento do Checkout Premium
       document.getElementById('checkout-btn').addEventListener('click', function() {
           if (window.SITE_CONFIG && window.SITE_CONFIG.links && window.SITE_CONFIG.links.checkoutPremium) {
               window.location.href = window.SITE_CONFIG.links.checkoutPremium;
           } else {
-              alert('O link de checkout não foi configurado no config.js!');
+              alert('O link de checkout PREMIUM não foi configurado no config.js!');
+          }
+      });
+
+      // Redirecionamento do Checkout Básico
+      document.getElementById('checkout-basico-btn').addEventListener('click', function() {
+          if (window.SITE_CONFIG && window.SITE_CONFIG.links && window.SITE_CONFIG.links.checkoutBasico) {
+              window.location.href = window.SITE_CONFIG.links.checkoutBasico;
+          } else {
+              alert('O link de checkout BÁSICO não foi configurado no config.js!');
           }
       });
 
