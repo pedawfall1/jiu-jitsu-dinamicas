@@ -1,16 +1,18 @@
 /**
- * Configuração da landing page.
+ * Configuração do site (página de vendas + quiz).
  *
- * Os valores do site original foram removidos — preencha com os seus
- * antes de publicar. Enquanto um campo estiver vazio:
- *   - metaPixelId vazio  -> nenhum rastreamento é disparado;
+ * Cada campo vazio desliga o recurso correspondente:
+ *   - metaPixelId / utmifyPixelId vazios -> o pixel não é carregado;
  *   - wistiaMediaId vazio -> a capa do vídeo aparece, mas não abre o player;
  *   - link de checkout vazio -> o botão continua na página sem destino;
  *   - whatsapp vazio     -> o botão flutuante fica escondido.
  */
 window.SITE_CONFIG = {
   // ID do Pixel da Meta, ex.: "1234567890123456".
-  metaPixelId: "",
+  metaPixelId: "1059796013613866",
+
+  // ID do Pixel da UTMify (rastreia UTMs e atribui as vendas).
+  utmifyPixelId: "6a8750047b15a79c1cf556ad",
 
   // ID do vídeo da Wistia no topo da página de vendas (index.html).
   wistiaMediaId: "i4q5pjvdok",
@@ -29,6 +31,39 @@ window.SITE_CONFIG = {
   timerStartSeconds: 7 * 60 + 41,
   timerResetSeconds: 57 * 60 + 41,
 };
+
+/**
+ * Pixels de rastreamento (Meta + UTMify).
+ * Rodam automaticamente em toda página que carrega este config.js — ou seja,
+ * a página de vendas e todas as etapas do quiz. Cada ID vazio desliga o pixel.
+ */
+(function initTracking() {
+  var cfg = window.SITE_CONFIG || {};
+
+  // Meta Pixel
+  if (cfg.metaPixelId) {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', cfg.metaPixelId);
+    fbq('track', 'PageView');
+  }
+
+  // UTMify Pixel
+  if (cfg.utmifyPixelId) {
+    window.pixelId = cfg.utmifyPixelId;
+    var u = document.createElement("script");
+    u.async = true;
+    u.defer = true;
+    u.src = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
+    (document.head || document.documentElement).appendChild(u);
+  }
+})();
 
 /**
  * Função utilitária para navegar entre as páginas do quiz.

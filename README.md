@@ -38,7 +38,8 @@ Os valores do site original foram removidos; os campos estão vazios esperando o
 
 | Campo | O que é |
 | --- | --- |
-| `metaPixelId` | Pixel da Meta (deixe `""` para desligar o rastreamento) |
+| `metaPixelId` | Pixel da Meta — **preenchido** (`1059796013613866`); `""` desliga |
+| `utmifyPixelId` | Pixel da UTMify — **preenchido** (`6a8750047b15a79c1cf556ad`); `""` desliga |
 | `wistiaMediaId` | vídeo do topo da página de vendas, na Wistia — **já preenchido** (`i4q5pjvdok`) |
 | `vslMediaId` | vídeo da VSL do quiz (`quiz/vsl.html`), na Wistia — **já preenchido** (`1f7llb243d`) |
 | `links.checkoutPremium` | botão "Quero o Premium" — R$ 19,90 |
@@ -49,6 +50,9 @@ Os valores do site original foram removidos; os campos estão vazios esperando o
 
 A capa do vídeo é o arquivo `assets/img/video-capa.jpg`, baixado da própria Wistia. Para
 trocar, é só substituir o arquivo (proporção 9:16).
+
+Os pixels (Meta e UTMify) são carregados uma única vez pelo `config.js` e valem para
+**todas** as páginas — a de vendas e todas as etapas do quiz.
 
 Enquanto um campo estiver vazio a página continua funcionando: o pixel não dispara, a capa
 do vídeo não abre o player, os botões de checkout ficam sem destino e o botão flutuante de
