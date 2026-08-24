@@ -15,7 +15,7 @@ window.SITE_CONFIG = {
   utmifyPixelId: "6a8750047b15a79c1cf556ad",
 
   // ID do vídeo da Wistia no topo da página de vendas (index.html).
-  wistiaMediaId: "i4q5pjvdok",
+  wistiaMediaId: "aarwk7o7dg",
 
   // ID do vídeo da Wistia usado na VSL do quiz (quiz/vsl.html).
   vslMediaId: "1f7llb243d",

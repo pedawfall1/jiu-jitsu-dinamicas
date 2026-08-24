@@ -436,9 +436,9 @@
           </div>
 
           <div>
-            <button onclick="openUpsellModal()" class="block w-full text-center px-8 py-4 text-gray-700 font-bold rounded-lg shadow-md transition-all duration-300 hover:shadow-lg bg-gray-200 hover:bg-gray-300 uppercase tracking-wide">
+            <a href="#" data-link="checkoutBasico" class="block w-full text-center px-8 py-4 text-gray-700 font-bold rounded-lg shadow-md transition-all duration-300 hover:shadow-lg bg-gray-200 hover:bg-gray-300 uppercase tracking-wide">
               ESCOLHER BÁSICO
-            </button>
+            </a>
             <div class="mt-4 flex justify-center">
               <img src="assets/img/whatsapp-badge.png" alt="Receba o conteúdo no WhatsApp" class="h-12 sm:h-14 opacity-90 object-contain">
             </div>
@@ -559,102 +559,6 @@
       </div>
     </div>
   </section>
-
-  <!-- UPSELL PRESENT MODAL -->
-  <div id="upsellModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 hidden transition-opacity duration-300">
-    <div class="relative bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300" id="modalCard">
-      <!-- Close Button -->
-      <button onclick="closeUpsellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10" aria-label="Fechar">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <div class="p-8 text-center">
-        <!-- Gift Icon wrapper -->
-        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 019.5 3H9a2 2 0 00-2 2v1m5-1a2 2 0 012 2v1M9 12H4.5A1.5 1.5 0 003 13.5v5A1.5 1.5 0 004.5 20H9m0-8V6m0 6h6m0 0h4.5A1.5 1.5 0 0121 13.5v5a1.5 1.5 0 01-1.5 1.5H15"></path>
-          </svg>
-        </div>
-
-        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 text-brandDark">Parabéns! Você ganhou um presente!</h2>
-        
-        <div class="flex items-center justify-center gap-2 mb-6">
-          <div class="w-2 h-2 bg-orange-400 rotate-45"></div>
-          <div class="w-2 h-2 bg-orange-400 rotate-45"></div>
-        </div>
-
-        <p class="text-lg font-semibold text-gray-700 mb-8">Oferta exclusiva só para você!</p>
-
-        <!-- Offer Card Box -->
-        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 mb-6 border-2 border-orange-200">
-          <h3 class="text-lg font-bold mb-3 text-brandDark">Leve a Versão Completa + Bônus</h3>
-          <div class="mb-3">
-            <p class="text-sm text-gray-500 line-through mb-1">De R$ 147,00</p>
-            <p class="text-4xl font-extrabold mb-1 text-green-500">
-              R$ 14<span class="text-2xl">,90</span>
-            </p>
-            <p class="text-sm font-bold text-green-500">Economia de R$ 132,10!</p>
-          </div>
-        </div>
-
-        <!-- Features list inside popup -->
-        <div class="text-left mb-6 space-y-3">
-          <p class="font-bold text-gray-900 mb-3 text-sm">Você vai receber:</p>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700">+250 Dinâmicas Interativas de Jiu-Jitsu completas</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700">20 Jogos de lutas interativas (Bônus)</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700">100 Exercícios de preparação física (Bônus)</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700 font-medium">Certificado Jiu-Jiteiro personalizado (Bônus)</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700">Atualizações mensais vitalícias</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <p class="text-sm text-gray-700">Suporte VIP prioritário</p>
-          </div>
-        </div>
-
-        <!-- Upsell CTA Button -->
-        <a href="#" data-link="checkoutUpsell" class="block w-full text-center px-6 py-4 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl mb-4 btn-orange-gradient">
-          <svg class="w-5 h-5 inline mr-2 -mt-1 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 019.5 3H9a2 2 0 00-2 2v1m5-1a2 2 0 012 2v1M9 12H4.5A1.5 1.5 0 003 13.5v5A1.5 1.5 0 004.5 20H9m0-8V6m0 6h6m0 0h4.5A1.5 1.5 0 0121 13.5v5a1.5 1.5 0 01-1.5 1.5H15"></path>
-          </svg>
-          Quero aproveitar por R$ 14,90!
-        </a>
-
-        <!-- Downsell checkout link -->
-        <a href="#" data-link="checkoutBasico" class="block w-full text-center text-gray-600 hover:text-gray-800 font-medium text-sm transition-colors mt-2">
-          Continuar com o básico
-        </a>
-      </div>
-    </div>
-  </div>
 
   <!-- TESTIMONIALS SECTION -->
   <section class="py-12 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
@@ -922,34 +826,7 @@
       document.getElementById("seconds").innerText = String(s).padStart(2, "0");
     }, 1000);
 
-    // 3. Modal Upsell Functions
-    const modal = document.getElementById("upsellModal");
-    const card = document.getElementById("modalCard");
-
-    function openUpsellModal() {
-      modal.classList.remove("hidden");
-      setTimeout(() => {
-        card.classList.remove("scale-95");
-        card.classList.add("scale-100");
-      }, 50);
-    }
-
-    function closeUpsellModal() {
-      card.classList.remove("scale-100");
-      card.classList.add("scale-95");
-      setTimeout(() => {
-        modal.classList.add("hidden");
-      }, 200);
-    }
-
-    // Close on outside click
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        closeUpsellModal();
-      }
-    });
-
-    // 4. Testimonial Carrousel Logic
+    // 3. Testimonial Carrousel Logic
     let currentSlide = 0;
     const slidesContainer = document.getElementById("slidesContainer");
     const totalSlides = 7;
@@ -985,7 +862,7 @@
     // Auto rotate every 4s
     const carouselInterval = setInterval(nextSlide, 4000);
 
-    // 5. FAQ Accordion Logic
+    // 4. FAQ Accordion Logic
     function toggleFaq(index) {
       document.querySelectorAll(".faq-content").forEach((item, idx) => {
         const button = item.previousElementSibling;
@@ -1014,11 +891,11 @@
       });
     }
 
-    // 6. Current Year dynamic update
+    // 5. Current Year dynamic update
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 
-    // 7. Aplica os links do config.js
-    const checkoutValues = { checkoutPremium: 19.90, checkoutUpsell: 14.90, checkoutBasico: 10.00 };
+    // 6. Aplica os links do config.js
+    const checkoutValues = { checkoutPremium: 19.90, checkoutBasico: 10.00 };
     document.querySelectorAll("[data-link]").forEach((el) => {
       const key = el.dataset.link;
       const url = SITE_CONFIG.links[key];
@@ -1035,11 +912,6 @@
       } else {
         el.removeAttribute("href");
       }
-    });
-
-    // 8. Fecha o modal com ESC
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeUpsellModal();
     });
   </script>
 
