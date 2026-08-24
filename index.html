@@ -903,8 +903,27 @@
         el.href = url;
         // Dispara InitiateCheckout (Meta) ao clicar num botão de checkout
         if (key in checkoutValues) {
-          el.addEventListener("click", () => {
-            if (window.trackInitiateCheckout) window.trackInitiateCheckout(checkoutValues[key]);
+          el.addEventListener("click", (e) => {
+            // 1) Dispara o evento SEMPRE, antes de qualquer outra decisao
+            try {
+              if (window.trackInitiateCheckout) window.trackInitiateCheckout(checkoutValues[key]);
+            } catch (err) {}
+
+            // 2) Se o clique abre em outra aba ou ja foi tratado, nao mexe na navegacao
+            if (e.defaultPrevented || e.button !== 0) return;
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            if (!window.fbq) return; // pixel bloqueado: vai direto pro checkout
+
+            // 3) Segura a navegacao ~350ms: sem isso o navegador descarrega a
+            //    pagina no mesmo tick e a requisicao do pixel e cancelada.
+            e.preventDefault();
+            let saiu = false;
+            const irParaCheckout = () => {
+              if (saiu) return;
+              saiu = true;
+              window.location.href = url;
+            };
+            setTimeout(irParaCheckout, 350);
           });
         }
       } else if (key === "whatsapp") {
